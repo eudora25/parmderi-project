@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-16"?>
+<Task version="1.4" xmlns="http://schemas.microsoft.com/windows/2004/02/mit/task">
+  <RegistrationInfo>
+    <Date>2025-06-23T00:00:00</Date>
+    <Author>System Administrator</Author>
+    <Description>의료기관 데이터 자동 마이그레이션 작업
+    
+im_medical_institutions 테이블의 데이터를 정규화된 테이블로 자동 이전하는 배치 작업입니다.
+
+실행 주기: 매일 오전 2시
+대상 데이터베이스: htest
+Docker 컨테이너: parmderi_mariadb
+
+이 작업은 다음을 수행합니다:
+1. 데이터베이스 백업 생성
+2. 신규/수정된 데이터 확인
+3. 증분 마이그레이션 실행
+4. 결과 검증 및 로그 기록
+5. 오래된 백업/로그 정리</Description>
+    <URI>\MedicalDataMigration</URI>
+  </RegistrationInfo>
+  <Triggers>
+    <!-- 매일 오전 2시에 실행 -->
+    <CalendarTrigger>
+      <StartBoundary>2025-06-23T02:00:00</StartBoundary>
+      <Enabled>true</Enabled>
+      <ScheduleByDay>
+        <DaysInterval>1</DaysInterval>
+      </ScheduleByDay>
+    </CalendarTrigger>
+  </Triggers>
+  <Principals>
+    <Principal id="Author">
+      <UserId>S-1-5-18</UserId>
+      <RunLevel>HighestAvailable</RunLevel>
+    </Principal>
+  </Principals>
+  <Settings>
+    <MultipleInstancesPolicy>IgnoreNew</MultipleInstancesPolicy>
+    <DisallowStartIfOnBatteries>false</DisallowStartIfOnBatteries>
+    <StopIfGoingOnBatteries>false</StopIfGoingOnBatteries>
+    <AllowHardTerminate>true</AllowHardTerminate>
+    <StartWhenAvailable>true</StartWhenAvailable>
+    <RunOnlyIfNetworkAvailable>false</RunOnlyIfNetworkAvailable>
+    <IdleSettings>
+      <StopOnIdleEnd>false</StopOnIdleEnd>
+      <RestartOnIdle>false</RestartOnIdle>
+    </IdleSettings>
+    <AllowStartOnDemand>true</AllowStartOnDemand>
+    <Enabled>true</Enabled>
+    <Hidden>false</Hidden>
+    <RunOnlyIfIdle>false</RunOnlyIfIdle>
+    <DisallowStartOnRemoteAppSession>false</DisallowStartOnRemoteAppSession>
+    <UseUnifiedSchedulingEngine>true</UseUnifiedSchedulingEngine>
+    <WakeToRun>false</WakeToRun>
+    <ExecutionTimeLimit>PT2H</ExecutionTimeLimit>
+    <Priority>7</Priority>
+    <RestartOnFailure>
+      <Interval>PT10M</Interval>
+      <Count>3</Count>
+    </RestartOnFailure>
+  </Settings>
+  <Actions Context="Author">
+    <Exec>
+      <Command>powershell.exe</Command>
+      <Arguments>-ExecutionPolicy Bypass -File "D:\Work_Project\parmderi_project\scripts\medical_data_migration.ps1"</Arguments>
+      <WorkingDirectory>D:\Work_Project\parmderi_project</WorkingDirectory>
+    </Exec>
+  </Actions>
+</Task>
