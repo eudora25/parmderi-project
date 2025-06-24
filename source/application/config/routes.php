@@ -84,3 +84,13 @@ $route['question/api_stats'] = 'Question_manager/api_stats';
 $route['question/detail/(:num)'] = 'Question_manager/detail/$1';
 $route['question/add'] = 'Question_manager/add';
 $route['question/edit/(:num)'] = 'Question_manager/edit/$1';
+
+// 의약품 관리 라우팅
+$route['products'] = 'Medical_products';
+$route['products/search'] = 'Medical_products/search';
+$route['products/detail/(:num)'] = 'Medical_products/detail/$1';
+$route['products/upload'] = 'Medical_products/upload';
+$route['products/process_excel'] = 'Medical_products/process_excel';
+$route['products/statistics'] = 'Medical_products/statistics';
+$route['products/autocomplete'] = 'Medical_products/autocomplete';
+$route['products/api'] = 'Medical_products/api';
