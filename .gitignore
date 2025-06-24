@@ -1,0 +1,63 @@
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Docker volumes (데이터베이스 데이터는 제외)
+mariadb_data/
+
+# Log files
+*.log
+source/application/logs/*.php
+
+# Temporary files
+*.tmp
+*.temp
+
+# Cache files
+source/application/cache/*
+!source/application/cache/index.html
+!source/application/cache/.htaccess
+
+# Upload files (실제 업로드된 파일들은 제외)
+source/uploads/*
+!source/uploads/index.html
+
+# Test files
+test_*.php
+
+# Nginx config files (개발용 설정들)
+nginx-*.conf
+!nginx-final.conf
+
+# Excel files (샘플 데이터는 제외)
+*.xlsx
+*.xls
+!sample_*.csv
+
+# Environment files
+.env
+.env.local
+.env.production
+
+# Composer
+/vendor/
+composer.lock
+
+# Node modules (if any)
+node_modules/
+
+# Build files
+/build/
+/dist/ 

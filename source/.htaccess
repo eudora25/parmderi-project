@@ -1,0 +1,23 @@
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php/$1 [L]
+
+# 보안: 중요한 디렉토리 접근 차단
+<Files "composer.json">
+    Order allow,deny
+    Deny from all
+</Files>
+
+<Files "composer.lock">
+    Order allow,deny
+    Deny from all
+</Files>
+
+# application과 system 디렉토리 접근 차단
+RewriteRule ^(application|system|\.env) - [F,L]
+RewriteRule ^(\.git|\.gitignore|\.gitkeep) - [F,L]
+
+# PHP 에러 표시 설정
+php_value display_errors On
+php_value display_startup_errors On
