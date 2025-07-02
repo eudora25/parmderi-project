@@ -192,4 +192,21 @@ ALTER TABLE search_logs ADD INDEX idx_time_similarity (search_time, similarity_s
 -- ====================================================================
 -- 스키마 생성이 완료되었습니다.
 -- 다음 단계: CodeIgniter에서 database.php 설정 확인
--- ==================================================================== 
+-- ====================================================================
+
+-- medical_products 테이블 생성
+CREATE TABLE IF NOT EXISTS `medical_products` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `product_name` varchar(255) NOT NULL,
+  `company_name` varchar(255) DEFAULT NULL,
+  `cso_item` varchar(255) DEFAULT NULL,
+  `category` varchar(100) DEFAULT NULL,
+  `price` decimal(10,2) DEFAULT NULL,
+  `commission_rate` decimal(5,2) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `idx_product_name` (`product_name`),
+  KEY `idx_company_name` (`company_name`),
+  KEY `idx_category` (`category`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci; 

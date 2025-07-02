@@ -23,7 +23,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = '';
+$config['base_url'] = 'http://localhost/';
 
 /*
 |--------------------------------------------------------------------------
@@ -35,7 +35,7 @@ $config['base_url'] = '';
 | variable so that it is blank.
 |
 */
-$config['index_page'] = 'index.php';
+$config['index_page'] = '';
 
 /*
 |--------------------------------------------------------------------------
@@ -138,7 +138,7 @@ $config['subclass_prefix'] = 'MY_';
 | Note: This will NOT disable or override the CodeIgniter-specific
 |	autoloading (application/config/autoload.php)
 */
-$config['composer_autoload'] = FALSE;
+$config['composer_autoload'] = realpath(APPPATH . '../vendor/autoload.php');
 
 /*
 |--------------------------------------------------------------------------
@@ -225,7 +225,7 @@ $config['allow_get_array'] = TRUE;
 | your log files will fill up very fast.
 |
 */
-$config['log_threshold'] = 0;
+$config['log_threshold'] = 4;
 
 /*
 |--------------------------------------------------------------------------
@@ -530,3 +530,50 @@ $config['rewrite_short_tags'] = FALSE;
 | Array:		array('10.0.1.200', '192.168.5.0/24')
 */
 $config['proxy_ips'] = '';
+
+/*
+|--------------------------------------------------------------------------
+| Display Debug backtrace
+|--------------------------------------------------------------------------
+|
+| If set to TRUE, a backtrace will be displayed along with php errors. If
+| error_reporting is disabled, the backtrace will not display, regardless
+| of this setting
+|
+*/
+$config['display_errors'] = FALSE;
+
+/*
+|--------------------------------------------------------------------------
+| Show / Hide PHP Errors
+|--------------------------------------------------------------------------
+|
+| This setting controls whether PHP errors should be displayed or hidden.
+| In production environments, this should be set to FALSE.
+|
+*/
+$config['show_php_errors'] = FALSE;
+
+/*
+|--------------------------------------------------------------------------
+| Error Reporting
+|--------------------------------------------------------------------------
+|
+| Different environments will require different levels of error reporting.
+| By default development will show errors but testing and live will hide them.
+*/
+if (defined('ENVIRONMENT')) {
+    switch (ENVIRONMENT) {
+        case 'development':
+            error_reporting(E_ALL & ~E_NOTICE & ~E_DEPRECATED & ~E_STRICT);
+            ini_set('display_errors', 0);
+            break;
+        case 'testing':
+        case 'production':
+            error_reporting(0);
+            ini_set('display_errors', 0);
+            break;
+        default:
+            exit('The application environment is not set correctly.');
+    }
+}

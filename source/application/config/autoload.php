@@ -58,7 +58,7 @@ $autoload['packages'] = array();
 |
 |	$autoload['libraries'] = array('user_agent' => 'ua');
 */
-$autoload['libraries'] = array();
+$autoload['libraries'] = array('database', 'session', 'form_validation', 'upload');
 
 /*
 | -------------------------------------------------------------------
@@ -88,8 +88,12 @@ $autoload['drivers'] = array();
 | Prototype:
 |
 |	$autoload['helper'] = array('url', 'file');
+|
+| You can loading them by telling CodeIgniter to look for a helper first
+| in application/helpers/ and then in system/helpers/.
+|
 */
-$autoload['helper'] = array();
+$autoload['helper'] = array('url', 'form', 'file');
 
 /*
 | -------------------------------------------------------------------
