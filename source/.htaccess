@@ -3,6 +3,14 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)$ index.php/$1 [L]
 
+# PHP 설정 (Apache 환경에서만 작동)
+php_value post_max_size 200M
+php_value upload_max_filesize 200M
+php_value memory_limit 1G
+php_value max_execution_time 0
+php_value max_input_time 0
+php_value max_file_uploads 50
+
 # 보안: 중요한 디렉토리 접근 차단
 <Files "composer.json">
     Order allow,deny

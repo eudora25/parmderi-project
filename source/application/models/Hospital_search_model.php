@@ -107,14 +107,13 @@ class Hospital_search_model extends CI_Model {
     private function search_hospital_detail_by_type($analysis, $question_type)
     {
         if (!$analysis['hospital_name']) {
-                    return array(
-            'hospitals' => array(),
-            'total_count' => 0,
-            'search_type' => 'hospital_detail',
-            'search_params' => $analysis,
-            'message' => '병원명을 포함해서 질문해 주세요.',
-            'question_type' => $question_type
-        );
+            return array(
+                'hospitals' => array(),
+                'total_count' => 0,
+                'search_type' => 'hospital_detail',
+                'message' => '병원명을 포함해서 질문해 주세요.',
+                'question_type' => $question_type
+            );
         }
         
         $this->db->where('state', 'Y');
@@ -124,14 +123,13 @@ class Hospital_search_model extends CI_Model {
         $hospitals = $this->db->get($this->table)->result();
         
         if (empty($hospitals)) {
-                    return array(
-            'hospitals' => array(),
-            'total_count' => 0,
-            'search_type' => 'hospital_detail',
-            'search_params' => $analysis,
-            'message' => "'{$analysis['hospital_name']}'에 해당하는 병원을 찾을 수 없습니다.",
-            'question_type' => $question_type
-        );
+            return array(
+                'hospitals' => array(),
+                'total_count' => 0,
+                'search_type' => 'hospital_detail',
+                'message' => "'{$analysis['hospital_name']}'에 해당하는 병원을 찾을 수 없습니다.",
+                'question_type' => $question_type
+            );
         }
         
         // 질문 유형에 따른 답변 생성
@@ -150,7 +148,6 @@ class Hospital_search_model extends CI_Model {
             'hospitals' => $formatted_hospitals,
             'total_count' => count($formatted_hospitals),
             'search_type' => 'hospital_detail',
-            'search_params' => $analysis,
             'message' => "'{$analysis['hospital_name']}'에 대한 {$question_type['type_name']} 정보입니다.",
             'question_type' => $question_type
         );

@@ -1,0 +1,58 @@
+# ====================================================================
+# 의료기관 데이터 마이그레이션 crontab 설정
+# 작성일: 2025-06-23
+# 설치 방법: crontab -e 명령으로 이 내용을 추가
+# ====================================================================
+
+# 환경 변수 설정 (필요시 수정)
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+SHELL=/bin/bash
+
+# ====================================================================
+# 의료기관 데이터 마이그레이션 작업 스케줄
+# ====================================================================
+
+# 매일 오전 2시에 실행 (서버 부하가 적은 시간)
+0 2 * * * /path/to/parmderi_project/scripts/medical_data_migration.sh >> /path/to/parmderi_project/logs/cron.log 2>&1
+
+# 대안 스케줄 옵션들:
+# 매주 일요일 오전 3시에 실행
+# 0 3 * * 0 /path/to/parmderi_project/scripts/medical_data_migration.sh >> /path/to/parmderi_project/logs/cron.log 2>&1
+
+# 매일 오전 2시와 오후 2시에 실행 (하루 2회)
+# 0 2,14 * * * /path/to/parmderi_project/scripts/medical_data_migration.sh >> /path/to/parmderi_project/logs/cron.log 2>&1
+
+# 평일(월-금) 오전 2시에만 실행
+# 0 2 * * 1-5 /path/to/parmderi_project/scripts/medical_data_migration.sh >> /path/to/parmderi_project/logs/cron.log 2>&1
+
+# 매월 1일 오전 3시에 실행 (월 1회)
+# 0 3 1 * * /path/to/parmderi_project/scripts/medical_data_migration.sh >> /path/to/parmderi_project/logs/cron.log 2>&1
+
+# ====================================================================
+# 로그 정리 작업 (선택사항)
+# ====================================================================
+
+# 매주 토요일 오후 11시에 오래된 로그 파일 정리
+0 23 * * 6 find /path/to/parmderi_project/logs -name "*.log" -mtime +30 -delete
+
+# 매달 마지막 날 자정에 오래된 백업 파일 정리
+0 0 28-31 * * [ $(date -d tomorrow +%d) -eq 1 ] && find /path/to/parmderi_project/backups -name "backup_*.sql" -mtime +30 -delete
+
+# ====================================================================
+# 사용법:
+# ====================================================================
+# 1. 이 파일의 경로를 실제 프로젝트 경로로 수정
+# 2. crontab -e 명령 실행
+# 3. 위의 설정 중 하나를 선택하여 추가
+# 4. crontab -l 명령으로 설정 확인
+# 
+# 예시:
+# # 현재 사용자의 crontab 편집
+# crontab -e
+# 
+# # crontab 설정 확인
+# crontab -l
+# 
+# # crontab 제거 (주의!)
+# crontab -r
+# ==================================================================== 

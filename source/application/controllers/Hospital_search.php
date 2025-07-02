@@ -54,7 +54,7 @@ class Hospital_search extends CI_Controller {
                 'success' => true,
                 'query' => $query,
                 'search_type' => $search_result['search_type'],
-                'search_params' => isset($search_result['search_params']) ? $search_result['search_params'] : array(),
+                'search_params' => $search_result['search_params'],
                 'hospitals' => $search_result['hospitals'],
                 'total_count' => $search_result['total_count'],
                 'message' => $search_result['message']
