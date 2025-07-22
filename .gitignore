@@ -1,61 +1,74 @@
-# OS generated files
-.DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
-Thumbs.db
+# 대용량 파일들 (특정 파일만 제외)
+local_backup_*.sql
+server_db_backup_*.sql
+parmderi_project_small.tar.gz
+doc/parmderi_005_2025-07-09.sql
+doc/parmderi_database_dump_20250710_102827.sql
 
-# IDE files
+# 데이터베이스 데이터
+mariadb_data/
+
+# 특정 대용량 파일들
+doc/parmderi_005_2025-07-09.sql
+doc/parmderi_database_dump_20250710_102827.sql
+local_backup_*.sql
+server_db_backup_*.sql
+parmderi_project_small.tar.gz
+
+# 로그 파일들
+*.log
+source/*/application/logs/*.php
+source/source/application/logs/*.php
+
+# 백업 파일들
+*_backup_*.sql
+*_dump_*.sql
+
+# 임시 파일들
+*.tmp
+*.temp
+
+# IDE 파일들
 .vscode/
 .idea/
 *.swp
 *.swo
-*~
 
-# Docker volumes (데이터베이스 데이터는 제외)
-mariadb_data/
+# OS 파일들
+.DS_Store
+Thumbs.db
 
-# Log files
-*.log
-source/application/logs/*.php
+# 환경 설정 파일들
+.env
+.env.local
+.env.production
 
-# Temporary files
-*.tmp
-*.temp
+# SSH 키 파일들
+*.pem
+*.key
 
-# Cache files
+# 업로드 파일들
+source/uploads/*
+!source/uploads/index.html
+
+# 캐시 파일들
 source/application/cache/*
 !source/application/cache/index.html
 !source/application/cache/.htaccess
 
-# Upload files (실제 업로드된 파일들은 제외)
-source/uploads/*
-!source/uploads/index.html
-
-# Test files
+# 테스트 파일들
 test_*.php
 
-# Nginx config files (개발용 설정들)
-nginx-*.conf
-!nginx-final.conf
-
-# Excel files (샘플 데이터는 제외)
+# Excel 파일들
 *.xlsx
 *.xls
 !sample_*.csv
-
-# Environment files
-.env
-.env.local
-.env.production
 
 # Composer
 /vendor/
 composer.lock
 
-# Node modules (if any)
+# Node modules
 node_modules/
 
 # Build files
